@@ -1,14 +1,14 @@
 import styles from "../../styles/mainStyle.module.css";
 import { useEffect, useState } from "react";
-import getListPokemon from "./getListPokemon";
+// import getListPokemon from "./getListPokemon";
 import PokeHeader from "@/components/pokemonHeader";
 import Link from "next/link";
 
 function Pokemon({ pokemon, images }) {
   //Call the rest of the list as a SWR
-  const { data, error } = getListPokemon("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20");
-  if (error) return "An error has ocurred";
-  if (!data) return "Loading";
+  // const { data, error } = getListPokemon("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20");
+  // if (error) return "An error has ocurred";
+  // if (!data) return "Loading";
   return (
     <>
       <PokeHeader></PokeHeader>
@@ -16,34 +16,32 @@ function Pokemon({ pokemon, images }) {
       <div className={styles.containerGrid}>
         {pokemon.results.map((poke, index) => {
           return (
-            <Link href={`pokemon/${poke.name}`}>
-              <div key={poke.url}>
-                <div className={styles.pokeItems}>
-                  <img src={images[index]} />
-                  <h2 className={styles.subText}>{poke.name}</h2>
-                </div>
+            <Link href={`pokemon/${poke.name}`} key={poke.url}>
+              <div className={styles.pokeItems}>
+                <img src={images[index]} />
+                <h2 className={styles.subText}>{poke.name}</h2>
               </div>
             </Link>
           );
         })}
         {/* Looping through SWR fetcher data */}
-        {data.items.results.map((poke, index) => {
-          return (
-            <div key={poke.url}>
-              <img className={styles.img} src={data.images[index]} />
-              <h2 className={styles.subText}>{poke.name}</h2>
-            </div>
-          );
-        })}
+        {/* {data.items.results.map((poke, index) => { */}
+        {/*   return ( */}
+        {/*     <div key={poke.url}> */}
+        {/*       <img className={styles.img} src={data.images[index]} /> */}
+        {/*       <h2 className={styles.subText}>{poke.name}</h2> */}
+        {/*     </div> */}
+        {/*   ); */}
+        {/* })} */}
       </div>
     </>
   );
 }
 
 export default Pokemon;
-
-export async function getServerSideProps() {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon/");
+//Change this prop to a server prop once
+export async function getStaticProps() {
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
   const data = await response.json();
   const images = await Promise.all(
     data.results.map(async (element) => {
