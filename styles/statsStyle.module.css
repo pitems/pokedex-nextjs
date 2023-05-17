@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  color: black;
+}
+
+.container {
+  background-color: white;
+}

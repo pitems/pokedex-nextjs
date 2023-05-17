@@ -12,12 +12,12 @@ function PokemonDetail({ pokemonData }) {
     <>
       <PokeHeader></PokeHeader>
       <div className={styles.background}>
-        <div className={styles.pokeContainer}></div>
-        <PokemonTable
-          pokemonID={pokemonID}
-          pokemonData={pokemonData}
-        ></PokemonTable>
-        <div className={styles.row}></div>
+        <div className={styles.pokeContainer}>
+          <PokemonTable
+            pokemonID={pokemonID}
+            pokemonData={pokemonData}
+          ></PokemonTable>
+        </div>
       </div>
     </>
   );

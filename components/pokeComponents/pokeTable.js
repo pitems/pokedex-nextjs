@@ -2,6 +2,7 @@ import PokeSpecies from "@/components/pokeComponents/speciesComponent";
 import styles from "../../styles/pokemonDetail.module.css";
 import AbilitiesComponent from "./pokeAbilities";
 import PokeTypes from "./pokeTypes";
+import StatsComponent from "./statsComponent";
 function PokemonTable({ pokemonID, pokemonData }) {
   return (
     <>
@@ -62,6 +63,8 @@ function PokemonTable({ pokemonID, pokemonData }) {
               <AbilitiesComponent
                 abilities={pokemonData.abilities}
               ></AbilitiesComponent>
+
+              <StatsComponent pokemonData={pokemonData}></StatsComponent>
             </div>
           </div>
         </div>
